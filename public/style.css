@@ -1,0 +1,47 @@
+.logo-container {
+    background-color: #c9bdbd; /* Light gray background */
+    padding: 20px; /* Add some padding */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Align items to the start (left) */
+    height: 100px; /* Set a fixed height for the container */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    width: auto; /* Set the width of the image */
+    height: 50px; /* Maintain the aspect ratio */
+    background-color: rgb(200, 144, 96); /* Ensure no background color */
+    display: block; /* Makes the image behave as a block element */
+    margin-right: 0px; /* Add space between the logo and the form */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;  
+    border: 0.1px solid rgb(126, 111, 111);
+}
+
+#search {
+    display: flex; /* Use flexbox for the form */
+}
+
+#dataInput {
+    padding: 15px; /* Add some padding for the input */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 3px; /* Optional: Add rounded corners */
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.contact-container{
+    width:200px; /* Set the width of the image */
+    height: 50px; /* Maintain the aspect ratio */
+    background-color: rgb(0, 0, 0); /* Ensure no background color */
+    top: 50%;
+    left:50%;
+    display:flex;
+    
+
+
+}
+
+
+
