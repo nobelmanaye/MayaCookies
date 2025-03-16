@@ -46,7 +46,7 @@
 }
 .mixes_header {
     background-color: #85f389; /* Light green background */
-    padding: 20px; /* Add some padding */
+    padding: 10px; /* Add some padding */
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Center items vertically */
     justify-content: center; /* Center items horizontally */
@@ -60,8 +60,9 @@
     letter-spacing: 2px; /* Add spacing between letters */
     border-radius: 10px; /* Rounded corners */
     text-align: center; /* Center-align text */
-    margin: 20px 0; /* Add margin for spacing */
+     /*margin: 10px 0; Add margin for spacing */
     transition: all 0.3s ease; /* Smooth hover effect */
+    width: 50%;
 }
 
 .mixes_header h1 {
@@ -82,7 +83,7 @@
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     height: 100vh; /* Set a height for the container (e.g., full viewport height) */
-    border: 1px solid #ccc; /* Optional: Add a border to visualize the container */
+   /* border: 1px solid #ccc;  Optional: Add a border to visualize the container */
 }
 
 .mix_1 {
@@ -93,7 +94,7 @@
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
 }
 #gallery-image {
-    max-width: 100%;
+    max-width:50%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 20px;
