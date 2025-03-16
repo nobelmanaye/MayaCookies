@@ -45,73 +45,47 @@
     margin-bottom:130px;
 }
 .mixes_header {
-    background-color: #85f389; /* Light green background */
-    padding: 10px; /* Add some padding */
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-    height: auto; /* Let the height adjust to content */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-    font-family: 'Arial', sans-serif; /* Use a clean font */
-    font-weight: bold; /* Make the text bold */
-    font-size: 20px; /* Increase font size */
-    color: #333; /* Dark gray text color */
-    text-transform: uppercase; /* Uppercase text */
-    letter-spacing: 2px; /* Add spacing between letters */
-    border-radius: 10px; /* Rounded corners */
-    text-align: center; /* Center-align text */
-     /*margin: 10px 0; Add margin for spacing */
-    transition: all 0.3s ease; /* Smooth hover effect */
-    width: 50%;
+    background-color: #85f389;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 43%;
+   
+    align-self: flex-end;
 }
 
 .mixes_header h1 {
-    margin: 0; /* Remove default margin from h1 */
-    padding: 0; /* Remove default padding from h1 */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
-}
-
-/* Hover effect for interactivity */
-.mixes_header:hover {
-    background-color: #6fd873; /* Slightly darker green on hover */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    margin: 0;
+    padding: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    padding-left: 20px;
 }
 
 .Mixes {
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Set a height for the container (e.g., full viewport height) */
-   /* border: 1px solid #ccc;  Optional: Add a border to visualize the container */
+    display: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 20px; /* Adjust this value as needed */
 }
 
-.mix_1 {
-    max-width: 100%; /* Ensure the image doesn't overflow */
-    max-height: 100%; /* Ensure the image doesn't overflow */
-}
-.mix_1:hover{
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
-}
 #gallery-image {
-    max-width:50%;
+    max-width: 50%;
     height: auto;
     border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.buttons button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.buttons button:hover {
-    background-color: #0056b3;
+    margin-top: 10px; /* Adjust this value to reduce space */
+    align-self: flex-start;
+    margin: 0;
 }
