@@ -1,11 +1,15 @@
 .logo-container {
-    background-color: #c9bdbd; /* Light gray background */
+    background-color: #2f2c2c; /* Light gray background */
     padding: 20px; /* Add some padding */
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Center items vertically */
     justify-content: center; /* Align items to the start (left) */
     height: 100px; /* Set a fixed height for the container */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 2 10px 30px rgba(0, 0, 0, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 5px solid rgba(255,255,255, 0.05);
+   
 }
 
 .logo {
@@ -73,12 +77,21 @@
 }
 
 .Mixes {
-    display: flex-start;
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: 100vh;
     padding-top: 20px; /* Adjust this value as needed */
+    background-color:#839701;
+    max-width:900px;
+    height: 450px;
+
+    
+    width: 400px;
+
+    overflow: hidden;
+
+
 }
 
 #gallery-image {
