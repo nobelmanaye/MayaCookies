@@ -25,7 +25,7 @@
 
 #search {
     display: flex; /* Use flexbox for the form */
-    height:80px
+    height:80px;
 }
 
 #dataInput {
@@ -87,7 +87,7 @@
     padding-top: 20px; /* Adjust this value as needed */
     background-color:#b5c73c;
     max-width:900px;
-    height: 450px;
+    height: 500px;
     animation: slideInFromRight 1s ease-out forwards;
 
     
@@ -107,6 +107,61 @@
     object-fit: contain; /* Ensures image maintains aspect ratio */
     display: block; /* Removes default image spacing */
     margin: 0 auto; 
+}
+.slider-container {
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #ff6b6b;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    background: #ff5252;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.slider-labels span {
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.slider-labels span:hover {
+    color: #ff6b6b;
+    transform: scale(1.05);
 }
 
 .slider-container {
@@ -128,13 +183,14 @@
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    -webkit-appearance:media-fullscreen-button;
     appearance: none;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: #000000;
     cursor: pointer;
+    animation: slideInFromRight
 }
 
 .slider::-moz-range-thumb {
