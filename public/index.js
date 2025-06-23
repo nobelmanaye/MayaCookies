@@ -1,25 +1,36 @@
 // Import Firebase SDKs
-import { indexedDBLocalPersistence } from "firebase/auth/web-extension";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+  
+//import { indexedDBLocalPersistence } from "firebase/auth/web-extension";
+// With this:
+//import { getAuth } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+// OR if using npm:
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
+document.addEventListener('DOMContentLoaded', function() {
+  
 // Your web app's Firebase configuration
+
+console.log("test start");
+
+// Your Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_BUCKET.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+const auth = getAuth(app);
+
 
 // Handle form submission
-document.getElementById('dataForm').addEventListener('submit', function(event) {
+const searchbar = document.getElementById('dataInput');
+searchbar.addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from refreshing the page
 
     // Get the value from the input field
@@ -47,8 +58,9 @@ let currentIndex = 0; // Track the current image index
 
 // Get elements
 const galleryImage = document.getElementById("gallery-image");
-const prevButton = document.getElementById("prev-btn");
-const nextButton = document.getElementById("next-btn");
+
+
+//const variable = document.getElementById();
 
 // Function to update the image with a fade effect
 function updateImage() {
@@ -61,16 +73,25 @@ function updateImage() {
 }
 
 // Event listener for the "Next" button
-nextButton.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % images.length; // Loop to the first image after the last
-    updateImage();
-});
 
-// Event listener for the "Previous" button
-prevButton.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length; // Loop to the last image after the first
-    updateImage();
-});
 
 // Initialize the first image
-updateImage();
+
+
+
+
+//slider for mixer
+const slider = document.getElementById("mixes-slider");
+
+slider.addEventListener("click", () =>{
+    console.log("pushing")
+
+
+
+
+   
+})
+
+   
+});
+
