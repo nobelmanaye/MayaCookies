@@ -116,7 +116,7 @@
 }
 
 .slider {
-    -webkit-appearance: none;
+    
     width: 100%;
     height: 10px;
     border-radius: 5px;
@@ -173,8 +173,7 @@
 }
 
 .slider {
-    -webkit-appearance: none;
-    width: 100%;
+   
     height: 10px;
     border-radius: 5px;
     background: #d3d3d3;
@@ -208,6 +207,72 @@
     color: #333;
     font-family: sans-serif;
 }
+
+ .gallery-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 400px; /* Adjust based on your image height */
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .gallery-dot.active {
+            background: #85f389;
+        }
+        
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.5);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        
+        .gallery-arrow.prev {
+            left: 10px;
+        }
+        
+        .gallery-arrow.next {
+            right: 10px;
+        }
 @keyframes slideInFromRight {
 
 
