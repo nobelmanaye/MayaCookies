@@ -46,31 +46,46 @@ searchbar.addEventListener('submit', function(event) {
         console.error('Error saving data: ', error);
     });
 });
-const images = [
-    "Images/stagea_2/mix_2_many.jpg",
-    "Images/stagea_2/shaun_the_sheep_many.jpg",
-    "Images/stagea_2/snowman_many.jpg",
-    "Images/stagea_2/Star_many-remove.png",
-    "Images/stagea_2/teddybair_many.png"
-];
-
-let currentIndex = 0; // Track the current image index
-
-// Get elements
-const galleryImage = document.getElementById("gallery-image");
 
 
-//const variable = document.getElementById();
-
-// Function to update the image with a fade effect
-function updateImage() {
-    galleryImage.classList.add("fade-out"); // Add fade-out class
-    setTimeout(() => {
-        galleryImage.src = images[currentIndex]; // Change the image source
-        galleryImage.classList.remove("fade-out"); // Remove fade-out class
-    }, 500); // Match the transition duration
-    console.log("index ", currentIndex);
-}
+const track = document.querySelector('.gallery-track');
+            const slides = Array.from(document.querySelectorAll('.gallery-slide'));
+            const dots = Array.from(document.querySelectorAll('.gallery-dot'));
+            const prevBtn = document.querySelector('.gallery-arrow.prev');
+            const nextBtn = document.querySelector('.gallery-arrow.next');
+            
+            let currentIndex = 0;
+            
+            // Update slider position
+            const updateSlider = () => {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            };
+            
+            // Next slide
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlider();
+            });
+            
+            // Previous slide
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlider();
+            });
+            
+            // Dot navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.dataset.index);
+                    updateSlider();
+                });
+            });
+})
 
 // Event listener for the "Next" button
 
@@ -81,17 +96,5 @@ function updateImage() {
 
 
 //slider for mixer
-const slider = document.getElementById("mixes-slider");
 
-slider.addEventListener("click", () =>{
-    console.log("pushing")
-
-
-
-
-   
-})
-
-   
-});
 
