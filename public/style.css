@@ -46,7 +46,7 @@
 
 }
 .gap{
-    margin-bottom:130px;
+    margin-bottom:120px;
 }
 .mixes_header {
     background-color: #85f389;
@@ -63,7 +63,7 @@
     border-radius: 10px;
     text-align: center;
     transition: all 0.3s ease;
-    width: 43%;
+    width: 490px;
     align-self: flex-end;
     animation: slideInFromRight 1s ease-out forwards;
 
@@ -121,23 +121,70 @@
 .Cookies{
 
     display:flex;
-    gap: 120px;
-
+    align-content: center;
+    gap: 820px;
+    
    
 
 }
 .Monotous{
     display: flex;
+    flex-direction: row;
     justify-content: flex-end;
+    align-items: center;
+    padding-top: 20px; /* Adjust this value as needed */
     background-color:#b5c73c;
-    width: 400px;
-    
+    max-width:1000px;
+    height: 500px;
     animation: slideInFromLeft 1s ease-out forwards;
 
+    
+    width:580px;
+    gap:20px 50px;
+    overflow: hidden;
+  
    
 
 
 }
+.mt_gallery-container{
+
+              width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+
+
+}
+
+.m_gallery-slide{
+
+    display:flex-end;
+    width: 100px;
+    max-height:300px;
+
+
+
+
+}
+
+
+.m_gallery-track{
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 400px; /* Adjust based on your image height */
+        }
+
+
+.m_gallery-slide img {
+
+  max-width: 70vh;
+  object-fit: contain;
+  margin-left:50px;
+  
+}
+
 
 .Mixes {
     display: flex;
@@ -146,15 +193,15 @@
     align-items: center;
     padding-top: 20px; /* Adjust this value as needed */
     background-color:#b5c73c;
-    max-width:900px;
+    max-width:1000px;
     height: 500px;
     animation: slideInFromRight 1s ease-out forwards;
 
     
-    width: 400px;
-
+    width: 480px;
+    gap:20px 50px;
     overflow: hidden;
-
+    
 
 }
 
@@ -168,6 +215,8 @@
     display: block; /* Removes default image spacing */
     margin: 0 auto; 
 }
+
+
 .slider-container {
     width: 80%;
     max-width: 500px;
