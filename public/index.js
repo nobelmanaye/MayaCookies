@@ -48,6 +48,51 @@ searchbar.addEventListener('submit', function(event) {
 });
 
 
+const mtrack = document.querySelector('.m_gallery-track');
+    const mslides = Array.from(
+    document.querySelectorAll('.m_gallery-slide'));
+    const mdots = Array.from(document.querySelectorAll('.m_gallery-dot'));
+    const m_prevBtn = document.querySelector('.m_gallery-arrow.prev');
+    const m_NextBtn = document.querySelector('.m_gallery-arrow.next');
+    let m_currentIndex = 0
+
+    const m_updateSlider= () =>{
+
+
+        mtrack.style.transform = (`translateX(-${m_currentIndex*100}%)`);
+
+        mdots.forEach((dot,index)=>{
+
+            dot.classList.toggle("active", index==m_currentIndex)
+        });
+
+    };
+
+  
+m_prevBtn.addEventListener('click', () => {
+                m_currentIndex = (m_currentIndex - 1 + slides.length) % slides.length;
+                m_updateSlider();
+            });
+    m_NextBtn.addEventListener('click', () =>{
+
+        m_currentIndex = (m_currentIndex+1)% mslides.length
+
+        m_updateSlider();
+
+
+    });
+
+    m_updateSlider();
+
+
+
+   
+
+
+
+    
+
+
 const track = document.querySelector('.gallery-track');
             const slides = Array.from(document.querySelectorAll('.gallery-slide'));
             const dots = Array.from(document.querySelectorAll('.gallery-dot'));
@@ -55,6 +100,7 @@ const track = document.querySelector('.gallery-track');
             const nextBtn = document.querySelector('.gallery-arrow.next');
             
             let currentIndex = 0;
+
             
             // Update slider position
             const updateSlider = () => {
