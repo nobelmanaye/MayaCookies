@@ -59,18 +59,19 @@ const mtrack = document.querySelector('.m_gallery-track');
     const m_updateSlider= () =>{
 
 
-        mtrack.style.transform = (`translateX(-${m_currentIndex*100}%)`);
+        mtrack.style.transform = (`translateX(-${m_currentIndex * 100}%)`);
 
         mdots.forEach((dot,index)=>{
+            console.log(m_currentIndex);
 
-            dot.classList.toggle("active", index==m_currentIndex)
+            dot.classList.toggle("active", index==m_currentIndex);
         });
 
     };
 
   
 m_prevBtn.addEventListener('click', () => {
-                m_currentIndex = (m_currentIndex - 1 + slides.length) % slides.length;
+                m_currentIndex = (m_currentIndex - 1 + mslides.length) % mslides.length;
                 m_updateSlider();
             });
     m_NextBtn.addEventListener('click', () =>{
@@ -78,6 +79,20 @@ m_prevBtn.addEventListener('click', () => {
         m_currentIndex = (m_currentIndex+1)% mslides.length
 
         m_updateSlider();
+
+
+    });
+
+    mdots.forEach(dot => {
+        dot.addEventListener('click', ()=> {
+            m_currentIndex = (m_currentIndex + 1)%mslides.length;
+            m_updateSlider();
+
+
+        });
+
+
+
 
 
     });
