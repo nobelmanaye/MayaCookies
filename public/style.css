@@ -83,7 +83,7 @@
     justify-content: center;
     align-self: flex-end;
     animation: slideInFromLeft 1s ease-out forwards;
-    width:43%; 
+    width:27%; 
     margin-left:auto;
     font-family: 'Arial', sans-serif;
     font-weight: bold;
@@ -96,6 +96,7 @@
     font-size: 20px;
     color: #333;
     text-transform: uppercase;
+   
 
 }
 .Monotous_header h1 {
@@ -138,8 +139,8 @@
     height: 500px;
     animation: slideInFromLeft 1s ease-out forwards;
 
-    
-    width:580px;
+    margin-left:auto;
+    width:480px;
     gap:20px 50px;
     overflow: hidden;
   
@@ -180,8 +181,12 @@
 .m_gallery-slide img {
 
   max-width: 70vh;
-  object-fit: contain;
-  margin-left:50px;
+  object-fit:contain;
+  width:364px;
+  margin-bottom: 10%;
+  margin-left:60%;
+  margin-right:10%
+  
   
 }
 
@@ -341,6 +346,7 @@
             height: 100%;
             object-fit: contain;
             border-radius: 10px;
+
         }
         
         .gallery-nav {
