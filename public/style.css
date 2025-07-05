@@ -161,9 +161,14 @@
 
 .m_gallery-slide{
 
-    display:flex-end;
-    width: 100px;
+    display:flex;
+    width: 100%;
+    height:100%;
+    flex-shrink:0;
+
     max-height:300px;
+    justify-content: center;
+    align-items:center;
 
 
 
@@ -180,12 +185,11 @@
 
 .m_gallery-slide img {
 
-  max-width: 70vh;
+  max-width: 100%;
+  max-height: 100%;
   object-fit:contain;
-  width:364px;
-  margin-bottom: 10%;
-  margin-left:60%;
-  margin-right:10%;
+  margin-top: 90px;
+
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
   
@@ -206,7 +210,7 @@
             cursor: pointer;
         }
         
-     .m_gallery-dotgallery-dot.active {
+     .m_gallery-dot.active {
             background: #85f389;
         }
         
@@ -428,6 +432,106 @@
         .gallery-arrow.next {
             right: 10px;
         }
+
+.cookie-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Quantity Selector - Same for Both */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.quantity-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1f1f1;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.quantity-btn:hover {
+    background: #85f389;
+    transform: scale(1.05);
+}
+
+.quantity-input {
+    width: 40px;
+    height: 32px;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    background: transparent;
+}
+
+/* Add Button - Same for Both */
+.add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 20px;
+    background: #85f389;
+    border: none;
+    border-radius: 30px;
+    color: #2f2c2c;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.add-btn:hover {
+    background: #71ae71;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+}
+
+.add-btn:active {
+    transform: translateY(0);
+}
+
+.add-icon {
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.add-btn:hover .add-icon {
+    transform: rotate(90deg);
+}
+
+/* Animations for Both */
+@keyframes cookieAdded {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.cookie-added {
+    animation: cookieAdded 0.4s ease;
+}
 @keyframes slideInFromRight {
 
 
