@@ -73,6 +73,7 @@ const mtrack = document.querySelector('.m_gallery-track');
 m_prevBtn.addEventListener('click', () => {
                 m_currentIndex = (m_currentIndex - 1 + mslides.length) % mslides.length;
                 m_updateSlider();
+                 resetAllQuantities();
             });
     m_NextBtn.addEventListener('click', () =>{
 
@@ -80,6 +81,7 @@ m_prevBtn.addEventListener('click', () => {
 
         m_updateSlider();
 
+        resetAllQuantities();
 
     });
 
@@ -131,12 +133,14 @@ const track = document.querySelector('.gallery-track');
             nextBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % slides.length;
                 updateSlider();
+                 resetAllQuantities();
             });
             
             // Previous slide
             prevBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + slides.length) % slides.length;
                 updateSlider();
+                 resetAllQuantities();
             });
             
             // Dot navigation
@@ -148,14 +152,93 @@ const track = document.querySelector('.gallery-track');
             });
 })
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const galleryTypes = ['.gallery-container', '.m_gallery-container'];
+    let totalWeight = 0; // Now tracking weight instead of quantity
+    const cartCount = document.querySelector('.cart-count');
+    
+    galleryTypes.forEach(selector => {
+        document.querySelectorAll(selector).forEach(container => {
+            const plusBtn = container.querySelector('.quantity-btn.plus');
+            const minusBtn = container.querySelector('.quantity-btn.minus');
+            const quantityInput = container.querySelector('.quantity-input');
+            const addBtn = container.querySelector('.add-btn');
+            const cartnum = document.querySelector('.cart-counter');
+            
+            // Quantity controls - now in 0.5kg increments
+            plusBtn.addEventListener('click', () => {
+                quantityInput.value = (parseFloat(quantityInput.value) + 0.5).toFixed(1);
+            });
+            
+            minusBtn.addEventListener('click', () => {
+                const currentVal = parseFloat(quantityInput.value);
+                if (currentVal > 0.5) {
+                    quantityInput.value = (currentVal - 0.5).toFixed(1);
+                }
+            });
+            
+            // Add to cart - now tracking kg instead of items
+            addBtn.addEventListener('click', () => {
+                const weight = parseFloat(quantityInput.value);
+                totalWeight += weight;
+                console.log(cartnum);
+                // Update cart display (round to nearest 0.5 for display)
+               //artCount.textContent = totalWeight.toFixed(1);
+                let currentCount = parseInt(cartnum.textContent);
+                cartnum.textContent = currentCount+1;
+                cartnum.style.display= "flex";
+                cartnum.classList.add('bump');
+                setTimeout(()=>{cartnum.classList.remove('bump'),300 });
+
+
+                
+                // Visual feedback
+                addBtn.classList.add('cookie-added');
+            //  cartCount.parentElement.classList.add('cart-bounce');
+                
+                setTimeout(() => {
+                    addBtn.classList.remove('cookie-added');
+             //     cartCount.parentElement.classList.remove('cart-bounce');
+                }, 400);
+                
+                console.log(`Added ${weight}kg from ${selector}`);
+            });
+            
+            // Validate manual input
+            quantityInput.addEventListener('change', () => {
+                let value = parseFloat(quantityInput.value);
+                
+                // Ensure value is a multiple of 0.5
+                value = Math.round(value * 2) / 2;
+                
+                // Enforce min/max
+                value = Math.max(0.5, Math.min(10, value));
+                
+                quantityInput.value = value.toFixed(1);
+            });
+        });
+    });
+});
+
 // Event listener for the "Next" button
 
 
 // Initialize the first image
+
+//update cart count based on added. 
+
 
 
 
 
 //slider for mixer
 
-
+function resetAllQuantities() {
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.value = '0.0';
+        ; // Can't be zero due to your min="0.5"
+        // If you want to allow zero, change the HTML min attribute to 0
+    });
+}
