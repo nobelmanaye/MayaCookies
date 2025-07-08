@@ -1,19 +1,8 @@
-// Import Firebase SDKs
-  
-//import { indexedDBLocalPersistence } from "firebase/auth/web-extension";
-// With this:
-//import { getAuth } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-// OR if using npm:
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import { cookieMixes } from './products.js'; 
-document.addEventListener('DOMContentLoaded', function() {
-  
-// Your web app's Firebase configuration
+import { cookieMixes } from './products.js';
 
-console.log("test start");
-
-// Your Firebase configuration
+// Firebase configuration and initialization
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -23,240 +12,157 @@ const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Cart state
+let cart = {
+  items: [],
+  totalItems: 0,
+  totalPrice: 0,
+  addItem(item, quantity) {
+    const existingItem = this.items.find(i => i.id === item.id);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      this.items.push({...item, quantity});
+    }
+    this.totalItems += quantity;
+    this.totalPrice += item.price * quantity;
+    updateCartUI();
+  }
+};
 
-// Handle form submission
-const searchbar = document.getElementById('dataInput');
-searchbar.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from refreshing the page
+// DOM Elements
+const searchbar = document.getElementById('search');
+const cartNum = document.querySelector('.cart-counter');
 
-    // Get the value from the input field
-    const dataInput = document.getElementById('dataInput').value;
+// Initialize galleries
+function initializeGalleries() {
+  // Main Mixes Gallery
+  const track = document.querySelector('.gallery-track');
+  const prevBtn = document.querySelector('.gallery-arrow.prev');
+  const nextBtn = document.querySelector('.gallery-arrow.next');
+  const dots = document.querySelectorAll('.gallery-dot');
+  let currentIndex = 0;
 
-    // Push data to Firebase
-    push(ref(database, 'data/'), {
-        input: dataInput
-    }).then(() => {
-        console.log('Data saved successfully!');
-        document.getElementById('dataInput').value = ''; // Clear the input field
-    }).catch((error) => {
-        console.error('Error saving data: ', error);
+  function updateSlider() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+    resetAllQuantities();
+  }
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % cookieMixes.length;
+    updateSlider();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + cookieMixes.length) % cookieMixes.length;
+    updateSlider();
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      currentIndex = parseInt(dot.dataset.index);
+      updateSlider();
     });
-});
+  });
 
+  // Monotonous Gallery (single cookies)
+  const mTrack = document.querySelector('.m_gallery-track');
+  const mPrevBtn = document.querySelector('.m_gallery-arrow.prev');
+  const mNextBtn = document.querySelector('.m_gallery-arrow.next');
+  const mDots = document.querySelectorAll('.m_gallery-dot');
+  let mCurrentIndex = 0;
 
-const mtrack = document.querySelector('.m_gallery-track');
-    const mslides = Array.from(
-    document.querySelectorAll('.m_gallery-slide'));
-    const mdots = Array.from(document.querySelectorAll('.m_gallery-dot'));
-    const m_prevBtn = document.querySelector('.m_gallery-arrow.prev');
-    const m_NextBtn = document.querySelector('.m_gallery-arrow.next');
-    let m_currentIndex = 0
+  function updateMonotonousSlider() {
+    mTrack.style.transform = `translateX(-${mCurrentIndex * 100}%)`;
+    mDots.forEach((dot, i) => dot.classList.toggle('active', i === mCurrentIndex));
+    resetAllQuantities();
+  }
 
-    const m_updateSlider= () =>{
+  mNextBtn.addEventListener('click', () => {
+    mCurrentIndex = (mCurrentIndex + 1) % cookieMixes.length;
+    updateMonotonousSlider();
+  });
 
+  mPrevBtn.addEventListener('click', () => {
+    mCurrentIndex = (mCurrentIndex - 1 + cookieMixes.length) % cookieMixes.length;
+    updateMonotonousSlider();
+  });
 
-        mtrack.style.transform = (`translateX(-${m_currentIndex * 100}%)`);
-
-        mdots.forEach((dot,index)=>{
-            console.log(m_currentIndex);
-
-            dot.classList.toggle("active", index==m_currentIndex);
-        });
-
-    };
-
-  
-m_prevBtn.addEventListener('click', () => {
-                m_currentIndex = (m_currentIndex - 1 + mslides.length) % mslides.length;
-                m_updateSlider();
-                 resetAllQuantities();
-            });
-    m_NextBtn.addEventListener('click', () =>{
-
-        m_currentIndex = (m_currentIndex+1)% mslides.length
-
-        m_updateSlider();
-
-        resetAllQuantities();
-
+  mDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      mCurrentIndex = parseInt(dot.dataset.index);
+      updateMonotonousSlider();
     });
-
-    mdots.forEach(dot => {
-        dot.addEventListener('click', ()=> {
-            m_currentIndex = (m_currentIndex + 1)%mslides.length;
-            m_updateSlider();
-
-
-        });
-
-
-
-
-
-    });
-
-    m_updateSlider();
-
-
-
-   
-
-
-
-    
-
-
-const track = document.querySelector('.gallery-track');
-            const slides = Array.from(document.querySelectorAll('.gallery-slide'));
-            const dots = Array.from(document.querySelectorAll('.gallery-dot'));
-            const prevBtn = document.querySelector('.gallery-arrow.prev');
-            const nextBtn = document.querySelector('.gallery-arrow.next');
-            
-            let currentIndex = 0;
-
-            
-            // Update slider position
-            const updateSlider = () => {
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                
-                // Update dots
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
-                });
-            };
-            
-            // Next slide
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                updateSlider();
-                 resetAllQuantities();
-            });
-            
-            // Previous slide
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                updateSlider();
-                 resetAllQuantities();
-            });
-            
-            // Dot navigation
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    currentIndex = parseInt(dot.dataset.index);
-                    updateSlider();
-                });
-            });
-})
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const galleryTypes = ['.gallery-container', '.m_gallery-container'];
-    let totalWeight = 0; // Now tracking weight instead of quantity
-    const cartCount = document.querySelector('.cart-count');
-    
-    galleryTypes.forEach(selector => {
-        document.querySelectorAll(selector).forEach(container => {
-            const plusBtn = container.querySelector('.quantity-btn.plus');
-            const minusBtn = container.querySelector('.quantity-btn.minus');
-            const quantityInput = container.querySelector('.quantity-input');
-            const addBtn = container.querySelector('.add-btn');
-            const cartnum = document.querySelector('.cart-counter');
-            
-            // Quantity controls - now in 0.5kg increments
-            plusBtn.addEventListener('click', () => {
-                quantityInput.value = (parseFloat(quantityInput.value) + 0.5).toFixed(1);
-            });
-            
-            minusBtn.addEventListener('click', () => {
-                const currentVal = parseFloat(quantityInput.value);
-                if (currentVal > 0.5) {
-                    quantityInput.value = (currentVal - 0.5).toFixed(1);
-                }
-            });
-            
-            // Add to cart - now tracking kg instead of items
-            addBtn.addEventListener('click', () => {
-                const weight = parseFloat(quantityInput.value);
-
-                if (weight>0){
-                totalWeight += weight;
-                console.log(cartnum);
-
-                
-                // Update cart display (round to nearest 0.5 for display)
-               //artCount.textContent = totalWeight.toFixed(1);
-                let currentCount = parseInt(cartnum.textContent);
-                cartnum.textContent = currentCount+1;
-                cartnum.style.display= "flex";
-                    cartnum.classList.add('bump');
-    
-                // Remove the class after animation completes
-                cartnum.addEventListener('animationend', function handler() {
-                    cartnum.classList.remove('bump');
-                    cartnum.removeEventListener('animationend', handler);
-                });
-                
-                // Visual feedback for button
-                addBtn.classList.add('cookie-added');
-                setTimeout(() => {
-                    addBtn.classList.remove('cookie-added');
-                }, 400);
-
-    
-                
-                // Visual feedback
-                addBtn.classList.add('cookie-added');
-            //  cartCount.parentElement.classList.add('cart-bounce');
-                
-                setTimeout(() => {
-                    addBtn.classList.remove('cookie-added');
-             //     cartCount.parentElement.classList.remove('cart-bounce');
-                }, 400);
-                
-                console.log(`Added ${weight}kg from ${selector}`);
-         
-            }
-         
-            });
-            
-            // Validate manual input
-            quantityInput.addEventListener('change', () => {
-                let value = parseFloat(quantityInput.value);
-                
-                // Ensure value is a multiple of 0.5
-                value = Math.round(value * 2) / 2;
-                
-                // Enforce min/max
-                value = Math.max(0.5, Math.min(10, value));
-                
-                quantityInput.value = value.toFixed(1);
-            });
-        });
-    });
-});
-
-// Event listener for the "Next" button
-
-
-// Initialize the first image
-
-//update cart count based on added. 
-
-
-
-
-
-//slider for mixer
-
-function resetAllQuantities() {
-    document.querySelectorAll('.quantity-input').forEach(input => {
-        input.value = '0.0';
-        ; // Can't be zero due to your min="0.5"
-        // If you want to allow zero, change the HTML min attribute to 0
-    });
+  });
 }
+
+// Cart functionality
+function setupCartControls() {
+  document.querySelectorAll('.add-btn').forEach((addBtn, index) => {
+    addBtn.addEventListener('click', () => {
+      const container = addBtn.closest('.cookie-controls');
+      const quantityInput = container.querySelector('.quantity-input');
+      const quantity = parseFloat(quantityInput.value);
+
+      if (quantity > 0) {
+        cart.addItem(cookieMixes[index], quantity);
+        updateCartUI();
+      }
+    });
+  });
+
+  // Quantity controls
+  document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.closest('.quantity-selector').querySelector('.quantity-input');
+      input.value = (parseFloat(input.value) + 0.5).toFixed(1);
+    });
+  });
+
+  document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.closest('.quantity-selector').querySelector('.quantity-input');
+      const newVal = parseFloat(input.value) - 0.5;
+      if (newVal >= 0.5) input.value = newVal.toFixed(1);
+    });
+  });
+}
+
+// Update cart UI
+function updateCartUI() {
+  cartNum.textContent = cart.totalItems;
+  cartNum.style.display = "flex";
+  cartNum.classList.add('bump');
+  cartNum.addEventListener('animationend', () => {
+    cartNum.classList.remove('bump');
+  }, { once: true });
+}
+
+// Reset quantities when changing slides
+function resetAllQuantities() {
+  document.querySelectorAll('.quantity-input').forEach(input => {
+    input.value = '0.5';
+  });
+}
+
+// Form submission
+if (searchbar) {
+  searchbar.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const dataInput = document.getElementById('dataInput').value;
+    // Firebase data push would go here
+    console.log('Search submitted:', dataInput);
+  });
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("App initialized");
+  initializeGalleries();
+  setupCartControls();
+ // updateCartUI();
+});
