@@ -189,10 +189,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 let currentCount = parseInt(cartnum.textContent);
                 cartnum.textContent = currentCount+1;
                 cartnum.style.display= "flex";
-                cartnum.classList.add('bump');
-                setTimeout(()=>{cartnum.classList.remove('bump'),300 });
+                    cartnum.classList.add('bump');
+    
+                // Remove the class after animation completes
+                cartnum.addEventListener('animationend', function handler() {
+                    cartnum.classList.remove('bump');
+                    cartnum.removeEventListener('animationend', handler);
+                });
+                
+                // Visual feedback for button
+                addBtn.classList.add('cookie-added');
+                setTimeout(() => {
+                    addBtn.classList.remove('cookie-added');
+                }, 400);
 
-
+    
                 
                 // Visual feedback
                 addBtn.classList.add('cookie-added');
