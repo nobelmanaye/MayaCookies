@@ -182,8 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add to cart - now tracking kg instead of items
             addBtn.addEventListener('click', () => {
                 const weight = parseFloat(quantityInput.value);
+
+                if (weight>0){
                 totalWeight += weight;
                 console.log(cartnum);
+
+                
                 // Update cart display (round to nearest 0.5 for display)
                //artCount.textContent = totalWeight.toFixed(1);
                 let currentCount = parseInt(cartnum.textContent);
@@ -215,6 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 400);
                 
                 console.log(`Added ${weight}kg from ${selector}`);
+         
+            }
+         
             });
             
             // Validate manual input
