@@ -240,6 +240,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+document.querySelector('.cart').addEventListener('click', ()=>{
+    window.location.href= "cart.html";
+
+
+
+
+});
 // Event listener for the "Next" button
 
 
