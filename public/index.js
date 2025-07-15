@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let m_currentIndex = 0; // Mobile
     let currentIndex = 0;   // Desktop
-    let cart = JSON.parse(localStorage.getItem('cart')||[];
+   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Initialize Firebase
     const firebaseConfig = {
@@ -134,15 +134,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isMixes = addBtn.id == 'Mixes-addbtn';
                 console.log(isMixes);
                 
+                
                 if (isMixes) {
                     console.log(currentIndex);
                     console.log(`Weight added: ${weight}kg`);
-                    console.log(cookieMixes[currentIndex]);
+                    let cartItem = cookieMixes[currentIndex];
+                    cartItem['weight'] = weight;
+                    console.log(cartItem);
+
+                    //adding the cookie to the cart
+                    cart.push(cartItem);
+                            console.log('Parsed localStorage.cart:', JSON.parse(localStorage.getItem('cart')));
                 } else {
+
+                    let cartItem = cookieSingles[m_currentIndex];
                     console.log(m_currentIndex);
                     console.log(`Weight added: ${weight}kg`);
-                    console.log(cookieSingles[m_currentIndex]);
-                }
+                    cartItem['weight'] = weight;
+                  
+                      console.log(cartItem);
+                     //adding the cookie to the cart
+                    cart.push(cartItem);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                     console.log('Parsed localStorage.cart:', JSON.parse(localStorage.getItem('cart')));
+              
+              
+                    }
 
                 addBtn.classList.add('cookie-added');
                 setTimeout(() => addBtn.classList.remove('cookie-added'), 400);
