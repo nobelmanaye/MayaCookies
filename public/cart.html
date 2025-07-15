@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cookie Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <header class="cart-header">
+        <div class="logo-container">
+            <img src="Images/logo.png" class="logo" alt="Cookie Logo">
+            <div class="header-controls">
+                <form id="search">
+                    <input type="text" id="dataInput" placeholder="Search cookies...">
+                </form>
+                <button class="cart-btn">
+                    🛒 <span class="cart-counter">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-main">
+        <section class="cart-items-section">
+            <h1 class="cart-title">Your Cookie Selection</h1>
+            <div class="cart-items-container">
+                <!-- Items will be inserted here by JavaScript later -->
+                <div class="empty-cart-message">
+                    <img src="Images/empty-cart.png" alt="Empty cart" class="empty-cart-icon">
+                    <p>Your cart is empty</p>
+                    <a href="index.html" class="continue-shopping">Continue Shopping</a>
+                </div>
+            </div>
+        </section>
+
+        <aside class="cart-summary">
+            <h2>Order Summary</h2>
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Calculated at checkout</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>$0.00</span>
+                </div>
+            </div>
+            <button class="checkout-btn" disabled>Proceed to Checkout</button>
+        </aside>
+    </main>
+
+    <footer class="cart-footer">
+        <p>© 2023 Cookie Delights. All rights reserved.</p>
+    </footer>
+</body>
+</html>
