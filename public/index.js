@@ -2,11 +2,16 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { cookieSingles, cookieMixes } from './Cookies.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     // Slider Variables
+    const Mixes_ls = [];
+    const Single_ls = [];
+
     let m_currentIndex = 0; // Mobile
     let currentIndex = 0;   // Desktop
+    let cart = JSON.parse(localStorage.getItem('cart')||[];
 
     // Initialize Firebase
     const firebaseConfig = {
@@ -50,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     mdots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
-            m_currentIndex = index; // Fixed: Use the dot's index directly
+            m_currentIndex = index;
             m_updateSlider();
         });
     });
@@ -123,10 +128,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     cartnum.classList.remove('bump');
                     cartnum.removeEventListener('animationend', handler);
                 });
-                console.log("starting current index")
-                console.log(currentIndex)
 
+                console.log("starting current index");
                 
+                const isMixes = addBtn.id == 'Mixes-addbtn';
+                console.log(isMixes);
+                
+                if (isMixes) {
+                    console.log(currentIndex);
+                    console.log(`Weight added: ${weight}kg`);
+                    console.log(cookieMixes[currentIndex]);
+                } else {
+                    console.log(m_currentIndex);
+                    console.log(`Weight added: ${weight}kg`);
+                    console.log(cookieSingles[m_currentIndex]);
+                }
 
                 addBtn.classList.add('cookie-added');
                 setTimeout(() => addBtn.classList.remove('cookie-added'), 400);
