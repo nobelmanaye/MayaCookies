@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type = "module" src = "./cart.js"> </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cookie Cart</title>
@@ -27,11 +28,18 @@
             <h1 class="cart-title">Your Cookie Selection</h1>
             <div class="cart-items-container">
                 <!-- Items will be inserted here by JavaScript later -->
-                <div class="empty-cart-message">
+                <!-- <div class="empty-cart-message">
                     <img src="Images/empty-cart.png" alt="Empty cart" class="empty-cart-icon">
                     <p>Your cart is empty</p>
-                    <a href="index.html" class="continue-shopping">Continue Shopping</a>
+                    <a href="index.html" class="continue-shopping">Continue Shopping</a> -->
                 </div>
+            <div class="empty-cart-message" id="empty-cart-message" style="display: none;">
+    <img src="Images/empty-cart.png" alt="Empty cart" class="empty-cart-icon">
+    <p>Your cart is empty</p>
+    <a href="index.html" class="continue-shopping">Continue Shopping</a>
+</div>
+            
+            
             </div>
         </section>
 

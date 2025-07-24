@@ -1,16 +1,20 @@
-// cart.js
-import { cart } from './index.js'; // Import your cart object
-
 document.addEventListener('DOMContentLoaded', () => {
   // Load cart from localStorage
-  cart.loadFromLocalStorage();
+  const cart = JSON.parse(localStorage.getItem('cart')) || { items: [], totalItems: 0, totalPrice: 0 };
+  const cartContainer = document.getElementById('cart-items-container');
   
-  // Display cart items
-  const cartContainer = document.createElement('div');
-  cartContainer.className = 'cart-container';
+  // Clear previous content
+  cartContainer.innerHTML = '';
   
   if (cart.items.length === 0) {
-    cartContainer.innerHTML = '<p>Your cart is empty</p>';
+    cartContainer.innerHTML = `
+      <div class="empty-cart-message">
+        <img src="Images/empty-cart.png" alt="Empty cart" class="empty-cart-icon">
+        <p>Your cart is empty</p>
+        <a href="index.html" class="continue-shopping">Continue Shopping</a>
+      </div>
+    `;
+    console.log("no items");
   } else {
     cart.items.forEach(item => {
       const itemElement = document.createElement('div');
@@ -27,16 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
       cartContainer.appendChild(itemElement);
+
+       console.log("items");
     });
     
-    const totalElement = document.createElement('div');
-    totalElement.className = 'cart-total';
-    totalElement.innerHTML = `
-      <h3>Total Items: ${cart.totalItems}</h3>
-      <h3>Total Price: $${cart.totalPrice.toFixed(2)}</h3>
-    `;
-    cartContainer.appendChild(totalElement);
+    // Update summary section
+    document.querySelector('.summary-row.total span:last-child').textContent = `$${cart.totalPrice.toFixed(2)}`;
+    document.querySelector('.summary-row:first-child span:last-child').textContent = `$${cart.totalPrice.toFixed(2)}`;
+    document.querySelector('.checkout-btn').disabled = false;
   }
   
-  document.body.appendChild(cartContainer);
+  // Update cart counter in header
+  const cartCounter = document.querySelector('.cart-counter');
+  if (cartCounter) {
+    cartCounter.textContent = cart.totalItems;
+  }
 });
