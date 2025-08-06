@@ -33,18 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       
       const itemHTML = `
-        <div class="cart-item">
-          <img src="${item.imagePath}" alt="${item.name}" class="cart-item-image">
-          <div class="cart-item-details">
-            <h3>${item.name}</h3>
-            <p>Price: $${item.price}</p>
-            <div class="cart-item-quantity">
-              <span>Quantity: ${item.weight}</span>
-            </div>
-            <p>Total: $${(item.price * item.weight)}</p>
-          </div>
-        </div>
-      `;
+         <div class="cart-item">
+    <img src="${item.imagePath}" alt="${item.name}" class="cart-item-image">
+    <div class="cart-item-details">
+      <h3 class="cart-item-name">${item.name}</h3>
+      <p class="cart-item-price">Price: $${item.price}</p>
+      <div class="cart-item-quantity">
+        <span>Quantity: ${item.weight}</span>
+      </div>
+    </div>
+  </div>
+`;
+      
       cartContainer.insertAdjacentHTML('beforeend', itemHTML);
     });
 
