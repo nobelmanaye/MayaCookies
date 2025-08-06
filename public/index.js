@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let cart =  {
   items: [],
   totalItems: 0,
-  totalWeight: 0  // Since you're tracking weight instead of price
+  totalWeight: 0, // Since you're tracking weight instead of price
+  totalPrice: 0
 };
 
     // Initialize Firebase
@@ -145,15 +146,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     let cartItem = {name: cookieMixes[currentIndex].name,
                         weight: weight,
                         imagePath: cookieMixes[currentIndex].imagePath,
-                        quantity: 1  
+                        quantity: 1,  
+                        price: cookieMixes[currentIndex].price
 
                        }
-   console.log("=====cart item. quantity should be ");
-                       console.log(cartItem);
+
                     //adding the cookie to the cart
                     
                     cart.items.push(cartItem);
                     cart.totalItems += cartItem.quantity;
+                    cart.totalPrice+=cartItem.price
                     //cart.totalPrice += (cartItem.price * cartItem.quantity);
                    console.log('cart')
                     console.log(cart)
@@ -168,7 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     let cartItem = {name: cookieSingles[m_currentIndex].name,
                         weight: weight,
                         imagePath:cookieSingles[m_currentIndex].imagePath,
-                        quantity: 1  
+                        quantity: 1 ,  
+                        price: cookieSingles[m_currentIndex].price
 
                        }
                    
@@ -179,13 +182,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                      cart.items.push(cartItem);
                     cart.totalItems += cartItem.quantity;
+                    cart.totalPrice+=cartItem.price;
                     //cart.totalPrice += (cartItem.price * cartItem.quantity);
                     localStorage.setItem('cart', JSON.stringify(cart));
                     console.log('cart')
                     console.log(cart)
                      console.log("=================");
                     localStorage.setItem('cart', JSON.stringify(cart));
-                     console.log('Parsed localStorage.cart:', JSON.parse(localStorage.getItem('cart')));
+                     //console.log('Parsed localStorage.cart:', JSON.parse(localStorage.getItem('cart')));
                  console.log("=================");
               
                     }

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     totalPrice: 0 
   };
   console.log("here");
-  //console.log(cart);
+  console.log(cart);
 
   // Get DOM elements
   const cartContainer = document.getElementById('cart-items-container');
@@ -31,17 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
       
     cart.items.forEach(item => {
 
-      console.log(item);
+      
       const itemHTML = `
         <div class="cart-item">
           <img src="${item.imagePath}" alt="${item.name}" class="cart-item-image">
           <div class="cart-item-details">
             <h3>${item.name}</h3>
-            <p>Price: $${1}</p>
+            <p>Price: $${item.price}</p>
             <div class="cart-item-quantity">
               <span>Quantity: ${item.weight}</span>
             </div>
-            <p>Total: $${(item.price * item.name.quantity)}</p>
+            <p>Total: $${(item.price * item.weight)}</p>
           </div>
         </div>
       `;
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
     // Update summary
-    document.querySelector('.summary-row.total span:last-child').textContent = `$${cart.totalPrice}`;
+    document.querySelector('.summary-row.total span:last-child').textContent = cart.totalPrice;
     checkoutBtn.disabled = false;
   
 
