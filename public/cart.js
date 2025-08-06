@@ -1,49 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Load cart from localStorage
-  const cart = JSON.parse(localStorage.getItem('cart')) || { items: [], totalItems: 0, totalPrice: 0 };
+  const cart = JSON.parse(localStorage.getItem('cart')) || { 
+    items: [], 
+    totalItems: 0, 
+    totalPrice: 0 
+  };
+  console.log("here");
+  //console.log(cart);
+
+  // Get DOM elements
   const cartContainer = document.getElementById('cart-items-container');
-  
-  // Clear previous content
+  const emptyCartMsg = document.getElementById('empty-cart-message');
+  const checkoutBtn = document.querySelector('.checkout-btn');
+  const cartCounter = document.querySelector('.cart-counter');
+
+  // Exit if critical elements are missing
+  // if (!cartContainer || !emptyCartMsg) {
+  //   console.error("Error: Required elements not found!");
+  //   return;
+  // }
+
+  // Clear cart container
   cartContainer.innerHTML = '';
+
   
-  if (cart.items.length === 0) {
-    cartContainer.innerHTML = `
-      <div class="empty-cart-message">
-        <img src="Images/empty-cart.png" alt="Empty cart" class="empty-cart-icon">
-        <p>Your cart is empty</p>
-        <a href="index.html" class="continue-shopping">Continue Shopping</a>
-      </div>
-    `;
-    console.log("no items");
-  } else {
+    emptyCartMsg.style.display = 'block'; // Show empty message
+ 
+    
+    emptyCartMsg.style.display = 'none';  // Hide empty message
+    if(cart){
+      
     cart.items.forEach(item => {
-      const itemElement = document.createElement('div');
-      itemElement.className = 'cart-item';
-      itemElement.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-        <div class="cart-item-details">
-          <h3>${item.name}</h3>
-          <p>Price: $${item.price.toFixed(2)}</p>
-          <div class="cart-item-quantity">
-            <span>Quantity: ${item.quantity}</span>
+
+      console.log(item);
+      const itemHTML = `
+        <div class="cart-item">
+          <img src="${item.imagePath}" alt="${item.name}" class="cart-item-image">
+          <div class="cart-item-details">
+            <h3>${item.name}</h3>
+            <p>Price: $${1}</p>
+            <div class="cart-item-quantity">
+              <span>Quantity: ${item.weight}</span>
+            </div>
+            <p>Total: $${(item.price * item.name.quantity)}</p>
           </div>
-          <p>Total: $${(item.price * item.quantity).toFixed(2)}</p>
         </div>
       `;
-      cartContainer.appendChild(itemElement);
-
-       console.log("items");
+      cartContainer.insertAdjacentHTML('beforeend', itemHTML);
     });
-    
-    // Update summary section
-    document.querySelector('.summary-row.total span:last-child').textContent = `$${cart.totalPrice.toFixed(2)}`;
-    document.querySelector('.summary-row:first-child span:last-child').textContent = `$${cart.totalPrice.toFixed(2)}`;
-    document.querySelector('.checkout-btn').disabled = false;
+
   }
+    // Update summary
+    document.querySelector('.summary-row.total span:last-child').textContent = `$${cart.totalPrice}`;
+    checkoutBtn.disabled = false;
   
-  // Update cart counter in header
-  const cartCounter = document.querySelector('.cart-counter');
-  if (cartCounter) {
-    cartCounter.textContent = cart.totalItems;
-  }
+
+  
+  if (cartCounter) cartCounter.textContent = cart.totalItems;
 });

@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let m_currentIndex = 0; // Mobile
     let currentIndex = 0;   // Desktop
-   let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart =  {
+  items: [],
+  totalItems: 0,
+  totalWeight: 0  // Since you're tracking weight instead of price
+};
 
     // Initialize Firebase
     const firebaseConfig = {
@@ -25,14 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const database = getDatabase(app); // Initialize Realtime Database
+    const database = getDatabase(); // Initialize Realtime Database
 
     // Mobile Gallery Logic
     const mtrack = document.querySelector('.m_gallery-track');
     const mslides = Array.from(document.querySelectorAll('.m_gallery-slide'));
     const mdots = Array.from(document.querySelectorAll('.m_gallery-dot'));
     const m_prevBtn = document.querySelector('.m_gallery-arrow.prev');
-    const m_NextBtn = document.querySelector('.m_gallery-arrow.next');
+    const m_NextBtn  = document.querySelector('.m_gallery-arrow.next');
 
     const m_updateSlider = () => {
         mtrack.style.transform = `translateX(-${m_currentIndex * 100}%)`;
@@ -129,35 +133,60 @@ document.addEventListener('DOMContentLoaded', function() {
                     cartnum.removeEventListener('animationend', handler);
                 });
 
-                console.log("starting current index");
+                //console.log("starting current index");
                 
                 const isMixes = addBtn.id == 'Mixes-addbtn';
-                console.log(isMixes);
+                //console.log(isMixes);
                 
                 
                 if (isMixes) {
-                    console.log(currentIndex);
-                    console.log(`Weight added: ${weight}kg`);
-                    let cartItem = cookieMixes[currentIndex];
-                    cartItem['weight'] = weight;
-                    console.log(cartItem);
+                    //console.log(currentIndex);
+                    //console.log(`Weight added: ${weight}kg`);
+                    let cartItem = {name: cookieMixes[currentIndex].name,
+                        weight: weight,
+                        imagePath: cookieMixes[currentIndex].imagePath,
+                        quantity: 1  
 
+                       }
+   console.log("=====cart item. quantity should be ");
+                       console.log(cartItem);
                     //adding the cookie to the cart
-                    cart.push(cartItem);
-                            console.log('Parsed localStorage.cart:', JSON.parse(localStorage.getItem('cart')));
+                    
+                    cart.items.push(cartItem);
+                    cart.totalItems += cartItem.quantity;
+                    //cart.totalPrice += (cartItem.price * cartItem.quantity);
+                   console.log('cart')
+                    console.log(cart)
+                     console.log("=================");
+                   
+                    localStorage.setItem('cart', JSON.stringify(cart));
+
+
+                            //console.log('Parsed localStorage.cart:', JSON.parse(localStorage.getItem('cart')));
                 } else {
 
-                    let cartItem = cookieSingles[m_currentIndex];
-                    console.log(m_currentIndex);
-                    console.log(`Weight added: ${weight}kg`);
-                    cartItem['weight'] = weight;
-                  
-                      console.log(cartItem);
+                    let cartItem = {name: cookieSingles[m_currentIndex].name,
+                        weight: weight,
+                        imagePath:cookieSingles[m_currentIndex].imagePath,
+                        quantity: 1  
+
+                       }
+                   
+                   console.log("cartItemn");
+                    console.log(cartItem);
+                     console.log("=================");
                      //adding the cookie to the cart
-                    cart.push(cartItem);
+                    
+                     cart.items.push(cartItem);
+                    cart.totalItems += cartItem.quantity;
+                    //cart.totalPrice += (cartItem.price * cartItem.quantity);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    console.log('cart')
+                    console.log(cart)
+                     console.log("=================");
                     localStorage.setItem('cart', JSON.stringify(cart));
                      console.log('Parsed localStorage.cart:', JSON.parse(localStorage.getItem('cart')));
-              
+                 console.log("=================");
               
                     }
 
