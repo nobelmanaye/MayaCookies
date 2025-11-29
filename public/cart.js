@@ -40,15 +40,32 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutBtn.disabled = false;
 
     checkoutBtn.addEventListener("click", () => {
-      // Slide cart items down
-      cartContainer.style.transition = 'all 0.5s ease';
-      cartContainer.style.transform = 'translateY(100px)';
-      cartContainer.style.opacity = '0.5';
+      // Get the position of the cart items container
+      const cartRect = cartContainer.getBoundingClientRect();
       
-      // Show popup
+      // Hide cart items and show popup in the same position
+      cartContainer.style.opacity = '0';
+      
+      // Show popup positioned exactly where cart items were
       const shippingPopup = document.getElementById('shipping-popup');
       if (shippingPopup) {
-        shippingPopup.style.display = 'flex';
+        // Position the popup content where cart items were
+        const popupContent = shippingPopup.querySelector('.popup-content');
+        popupContent.style.cssText = `
+          position: absolute;
+          top: ${cartRect.top}px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: white;
+          padding: 30px;
+          border-radius: 15px;
+          width: 90%;
+          max-width: 500px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          z-index: 1001;
+        `;
+        
+        shippingPopup.style.display = 'block';
         
         // Populate order summary
         document.getElementById('popup-subtotal').textContent = `$${cart.totalPrice.toFixed(2)}`;
@@ -94,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 locationBtn.disabled = false;
               },
               {
-                enableHighAccuracy: true, // Get exact location
+                enableHighAccuracy: true,
                 timeout: 10000,
                 maximumAge: 0
               }
@@ -104,13 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Close popup handler - also reset cart position
+        // Close popup handler - show cart items again
         const closePopup = document.querySelector('.close-popup');
         if (closePopup) {
           closePopup.onclick = () => {
             shippingPopup.style.display = 'none';
-            // Slide cart items back up
-            cartContainer.style.transform = 'translateY(0)';
             cartContainer.style.opacity = '1';
           };
         }
@@ -122,8 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             alert('Order placed successfully!');
             shippingPopup.style.display = 'none';
-            // Reset cart position after order
-            cartContainer.style.transform = 'translateY(0)';
             cartContainer.style.opacity = '1';
           };
         }
